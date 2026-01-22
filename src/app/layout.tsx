@@ -24,6 +24,7 @@ export default function RootLayout({
         className={`${outfit.className} antialiased`}
       >
         <main className='container mx-auto h-screen relative'>
+          <div className="bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),rgba(0,0,0,0)_55%)] h-96 absolute -top-20 left-0 w-375"></div>
           <Navbar />
           <div className="pt-24 h-full content-center ">
             {children}

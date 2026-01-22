@@ -12,7 +12,7 @@ const Navbar = () => {
 
     return (
         <div className='absolute top-10 left-0 w-full flex items-center justify-between border-b border-gray-700 pb-5'>
-            <Link href={"/"}>CLERK</Link>
+            <Link href={"/"} className='text-2xl font-extrabold'>CLERK</Link>
             <nav className='flex items-center gap-4'>
                 {navList?.map((nav) => <Link key={nav.href} href={nav.href}>{nav.name}</Link>)}
             </nav>
