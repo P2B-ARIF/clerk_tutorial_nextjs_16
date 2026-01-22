@@ -1,14 +1,17 @@
+import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 import { Button } from "@/components/ui/button";
 
-const Dashboard = () => {
+const Dashboard = async () => {
+    const user = await currentUser();
+
     return (
         <div className="min-h-screen bg-black px-4 py-10 text-zinc-100">
             <section className="mx-auto w-full max-w-6xl overflow-hidden md:p-12">
                 <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-center ">
                     <div className="max-w-2xl space-y-4 mx-auto text-center">
-                        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-zinc-500">
-                            Welcome back
+                        <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+                            Welcome back <span className="text-white animate-pulse"> - {user?.firstName}</span>
                         </p>
                         <h1 className="text-3xl font-semibold leading-tight text-white md:text-4xl">
                             Your workspace is ready. Let’s build momentum today.

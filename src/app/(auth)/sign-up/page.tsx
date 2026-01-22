@@ -1,7 +1,7 @@
 "use client";
 
 import { useSignUp } from "@clerk/nextjs";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +18,7 @@ export default function SignUpPage() {
 
     const [formData, setFormData] = useState({
         name: "",
+        username: "",
         email: "",
         password: "",
     });
@@ -46,14 +47,16 @@ export default function SignUpPage() {
             await signUp.create({
                 firstName: formData.name,
                 emailAddress: formData.email,
-                password: formData.password
-            })
+                password: formData.password,
+                username: formData.username,
+            });
 
-            // Email verification (OTP / link)
             await signUp.prepareEmailAddressVerification({
                 strategy: "email_code",
             });
+
             router.push("/verify-email");
+
         } catch (err: any) {
             alert(err.errors?.[0]?.message);
         }
@@ -81,6 +84,26 @@ export default function SignUpPage() {
                     />
                     <FieldDescription className="text-xs text-zinc-500">
                         Use the name you want displayed on your profile.
+                    </FieldDescription>
+                </Field>
+                <Field>
+                    <FieldLabel
+                        htmlFor="username"
+                        className="text-xs font-semibold uppercase tracking-wide text-zinc-400"
+                    >
+                        UserName
+                    </FieldLabel>
+                    <Input
+                        id="username"
+                        type="text"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder="Your username"
+                        required
+                        className="h-11 border-white/10 bg-black/40 text-white placeholder:text-zinc-500 focus-visible:border-white/40 focus-visible:ring-white/20"
+                    />
+                    <FieldDescription className="text-xs text-zinc-500">
+                        Use the username you want displayed on your profile.
                     </FieldDescription>
                 </Field>
 
