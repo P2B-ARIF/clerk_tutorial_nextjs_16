@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 
 const outfit = Outfit({
@@ -19,18 +20,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${outfit.className} antialiased`}
-      >
-        <main className='container mx-auto h-screen relative'>
-          <div className="bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),rgba(0,0,0,0)_55%)] h-96 absolute -top-20 left-0 w-375"></div>
-          <Navbar />
-          <div className="pt-24 h-full content-center ">
-            {children}
-          </div>
-        </main>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${outfit.className} antialiased`}>
+          <main className="container mx-auto h-screen relative">
+            <div className="bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),rgba(0,0,0,0)_55%)] h-96 absolute -top-20 left-0 w-375"></div>
+            <Navbar />
+            <div className="pt-24 h-full content-center ">{children}</div>
+          </main>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
